@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departemen Kastrat - DEMA FK UIN</title>
+    <meta name="description" content="Halaman Departemen Kajian Aksi dan Strategi (Kastrat) DEMA FK UIN Syarif Hidayatullah.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Basic reset */
+        body, h2, p, ul {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+        }
+
+        /* Body styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url('bg.jpg'); /* Ganti dengan URL gambar Anda */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed; /* Agar gambar tetap saat halaman digulir */
+            color: #e6dada;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Overlay styling */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Header styling */
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Logo styling */
+        .header-logo {
+            width: 300px;
+            height: auto;
+        }
+
+        /* Navigation styling */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 15px; /* Space between navigation items */
+        }
+
+        nav ul li {
+            display: inline-block; /* Change to inline-block for hover effect */
+            position: relative; /* Needed for submenu positioning */
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+            padding: 10px; /* Add some padding to increase the clickable area */
+            display: block; /* Ensures the entire area is clickable */
+        }
+
+        /* Submenu styling */
+        nav ul li ul {
+            display: none; /* Hide the submenu by default */
+            position: absolute; /* Position submenu absolutely within the li */
+            top: 100%; /* Position submenu below the parent item */
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.7); /* Slightly darker background */
+            padding: 0;
+            list-style-type: none;
+            margin: 0;
+        }
+
+        nav ul li ul li {
+            display: block; /* Display submenu items as block elements */
+        }
+
+        nav ul li ul li a {
+            padding: 10px; /* Padding for submenu items */
+            color: #fff;
+        }
+
+        /* Show submenu on hover */
+        nav ul li:hover ul {
+            display: block; /* Show the submenu when parent item is hovered */
+        }
+
+        /* Panah ke bawah styling untuk item dengan submenu */
+        nav ul li.has-submenu > a::after {
+            content: "\f078"; /* Unicode untuk panah bawah dari FontAwesome */
+            font-family: "Font Awesome 5 Free"; /* Pastikan font-awesome digunakan */
+            font-weight: 900;
+            margin-left: 8px; /* Jarak antara teks dan panah */
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        /* Rotate panah ke bawah saat submenu aktif */
+        nav ul li:hover > a::after {
+            transform: rotate(180deg); /* Rotate panah ke bawah 180 derajat */
+        }
+
+        /* Main content styling */
+        main {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 25px;
+            text-align: center;
+        }
+        .department-item {
+            display: flex;
+            justify-content: space-between;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid transparent;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 1200px;
+            color: inherit;
+            transition: background-color 0.3s ease;
+        }
+        .department-item img {
+            width: 100px;
+            height: auto;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .text-content {
+            flex: 1;
+            text-align: justify;
+        }
+
+        .department-item h2 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .department-item p {
+            font-size: 14px;
+            color: #bababa;
+        }
+
+        /* Styling for members list */
+        .members {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 members per row */
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.member-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1); /* Background color untuk setiap anggota */
+    border-radius: 15px; /* Sudut rounded */
+    padding: 20px; /* Spasi di dalam box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sedikit bayangan untuk tampilan menarik */
+}
+
+.member-item img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%; /* Membuat gambar menjadi lingkaran */
+    margin-bottom: 10px;
+    border: 5px solid rgba(255, 255, 255, 0.5); /* Memberikan border putih transparan di sekitar gambar */
+}
+
+.member-item p {
+    font-size: 20px;
+    color: #fff;
+}
+        /* Footer Styling */
+        footer {
+    background-color: #000000;
+    color: #fff;
+    padding: 20px;
+    text-align: left;
+    font-family: 'Arial', sans-serif;
+}
+
+h4 {
+    text-align: left;
+}
+.footer-content {
+    display: flex;
+    justify-content: space-around; /* Sebar kolom dengan ruang merata */
+    flex-wrap: wrap;
+    text-align: left; /* Pusatkan konten dalam setiap section */
+}
+
+.footer-section {
+    flex-basis: 20%;
+    margin-bottom: 20px;
+    text-align: left; /* Pastikan teks di dalam section diratakan di tengah */
+}
+.footer-section.address p, .footer-section.contact p, .footer-section.media-partners p, .footer-section.cooperation p {
+    text-align: left; /* Rata tengah untuk paragraf dalam section */
+}
+.footer-section h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.footer-section.logo img {
+    width: 150px; /* Adjust the size of the logo */
+    height: auto;
+}
+
+.footer-section.address p {
+    max-width: 300px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.social-icons i {
+    font-size: 20px;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.social-icons i:hover {
+    color: #f39c12; /* Change to your desired hover color */
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 10px;
+    font-size: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+    </style>
+</head>
+<body>
+    <header>
+        <img src="dewan E.png" alt="Logo" class="header-logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li class="has-submenu">
+                    <a href="#">Tentang Kami</a>
+                    <ul>
+                        <li><a href="#visimisi">Visi Dan Misi</a></li>
+                        <li><a href="departemen.html">Departemen</a></li>
+                        <li><a href="#Pengurus">Pengurus</a></li>
+                    </ul>
+                </li>
+                <li><a href="#Artikel">Artikel</a></li>
+                <li><a href="#Kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <img src="Banner kastrat.png" alt="">
+        <div class="department-item">
+            <div class="text-content">
+                <h2>Departemen Kajian Aksi dan Strategi</h2>
+                <p>Kajian, Aksi, dan Strategi yang disingkat Kastrat adalah departemen yang memiliki fokus terhadap isu-isu dalam ruang lingkup kampus maupun masyarakat umum. Kastrat sendiri merupakan sebuah proses berpikir, bersikap, dan bertindak dengan sifat yang kritis dan konstruktif atas sebuah permasalahan.</p>
+                <h3>Anggota Departemen Kastrat</h3>
+                <h3>Periode 2023/2024</h3>
+                <div class="members">
+                    <div class="member-item">
+                        <img src="juper.png" alt="Nama Anggota 1">
+                        <p>Zufr Fadhly A.</p>
+                        <P>Ketua Departemen</P>
+                    </div>
+                    <div class="member-item">
+                        <img src="shabin.png" alt="Nama Anggota 2">
+                        <p>Shabrina Nandiva N.</p>
+                        <p>HRD</p>
+                    </div>
+                    <div class="member-item">
+                        <img src="zia.png" alt="Nama Anggota 3">
+                        <p>Ahmad Zia</p>
+                        <p>Anggota Departemen</p>
+                    </div>
+                    <div class="member-item">
+                        <img src="aul.png" alt="Nama Anggota 4">
+                        <p>Auliyah</p>
+                        <p>Anggota Departemen</p>
+                    </div>
+                    <div class="member-item">
+                        <img src="nabila.png" alt="Nama Anggota 5">
+                        <p>Nabila Putri N.</p>
+                        <p>Anggota Departemen</p>
+                    </div>
+                    <div class="member-item">
+                        <img src="russel.png" alt="Nama Anggota 6">
+                        <p>Rafli Rieugenia Tejasukmana</p>
+                        <p>Anggota Departemen</p>
+                    </div>
+                    <div class="member-item">
+                        <img src="sadad.png" alt="Nama Anggota 7">
+                        <p>Maulana Sadad</p>
+                        <p>Anggota Departemen</p>
+                    </div>
+                    <div class="member-item">
+                        <img src="hasna.png" alt="Nama Anggota 8">
+                        <p>Hasna Nandya Maheswari</p>
+                        <p>Anggota Departemen</p>
+                    </div>
+                    <div class="member-item">
+                        <img src="nada.png" alt="Nama Anggota 9">
+                        <p>Andi Najda N.</p>
+                        <p>Anggota Departemen</p>
+                    </div>
+                    <div class="member-item">
+                        <img src="alif.png" alt="Nama Anggota 10">
+                        <p>Alifia Faiza</p>
+                        <p>Anggota Departemen</p>
+                    </div>
+                    <div class="member-item">
+                        <img src="jay.png" alt="Nama Anggota 11">
+                        <p>Amanda Hafizhah</p>
+                        <p>Anggota Departemen</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section logo">
+                <img src="kabinet logo.png" alt="BEM Logo">
+            </div>
+            <div class="footer-section contact">
+                <h4>Narahubung</H4>
+                <p>Email: dema.fk.ormawa@apps.uinjkt.ac.id</p>
+                <p>+6282280001635 (Russel)</p>
+            </div>
+            <div class="footer-section media-partners">
+                <h4>Media Partner</h4>
+                <p>Internal: +6285841753769 (Russel)</p>
+                <p>Eksternal: +6285214989530 (Russel), +6282191666270 (Russel)</p>
+            </div>
+            <div class="footer-section cooperation">
+                <h4>Kerjasama</h4>
+                <p>+6281999152099 (Russel)</p>
+                <p>+6281929749545 (Russel)</p>
+            </div>
+            <div class="footer-section address">
+                <h4>Fakultas Kedokteran UIN Jakarta</h4>
+                <p>Jl. Kertamukti No.4, Pisangan, Kec. Ciputat Tim., Kota Tangerang Selatan, Banten 15419</p>
+                <h4>Kenali Kami Lebih Dalam!</h4>
+                <div class="social-icons">
+                    <a href="https://line.me" target="_blank">
+                        <i class="fab fa-line"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/dema.fkuinjkt/" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@demafkuinjkt1215" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; Copyright 2024 Dewan Eksekutif Mahasiswa Fakultas Kedokteran UIN Jakarta</p>
+        </div>
+    </footer>       
+</body>
+</html>
